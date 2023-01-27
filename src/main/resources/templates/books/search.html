@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+
+<form th:action="@{/books/search}" th:method="GET">
+    <label for = "startingWith">Enter key word:</label>
+    <input type="text" name="startingWith" th:value="${startingWith}" class="form-control"
+           placeholder="Insert value..." id="startingWith" />
+    <input type="submit" value="Search"/>
+</form>
+
+
+<div th:if="${searchBooks}">
+    <hr/>
+    <b style="background-color: crimson"  th:if="${searchBooks.isEmpty()}"> Book is not found</b>
+    <b th:if="${!searchBooks.isEmpty()}">Books:</b>
+    <div th:each="book:${searchBooks}">
+        <div  th:text="${book.getTitle()+', '+book.getAuthor()+', '+book.getYearOfRelease()}">a</div>
+    </div>
+    <hr/>
+</div>
+
+
+</body>
+</html>
